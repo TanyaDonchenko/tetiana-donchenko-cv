@@ -1,0 +1,608 @@
+/* ==========================================================================
+   TETIANA DONCHENKO — RESUME WEBSITE STYLESHEET
+   ==========================================================================
+   This file is organized top to bottom in the same order the sections
+   appear on the page: variables -> header/nav -> hero -> buttons ->
+   sections -> tags -> cards -> footer -> responsive rules.
+
+   HOW TO CUSTOMIZE THIS SITE YOURSELF
+   - Colors, fonts, spacing, and corner radius are all controlled from the
+     ":root" block right below. Change a value there and it updates
+     everywhere on the site automatically.
+   - Each section below has a short comment explaining what it controls.
+   - Search for "CUSTOMIZE" comments for the most common things people
+     want to tweak (photo size, colors, spacing).
+   ========================================================================== */
+
+:root {
+  /* ---- Colors -----------------------------------------------------------
+     Change these hex values to re-theme the entire site. */
+  --color-bg: #FFFFFF;              /* page background */
+  --color-text: #3A3A3A;            /* main body text color */
+  --color-text-secondary: #707070;  /* muted/secondary text (dates, notes) */
+  --color-dark-blue: #13426E;       /* headings, nav brand, primary buttons */
+  --color-accent-blue: #5B9BD5;     /* eyebrow label, hover states, focus ring */
+  --color-card-bg: #EAF1FA;         /* light blue card background */
+  --color-card-bg-alt: #DDE9F6;     /* slightly darker card background (hover) */
+  --color-border: #DDE3EA;          /* thin borders/dividers everywhere */
+
+  /* ---- Shape & Layout ----------------------------------------------------
+     --radius controls the rounded corners on cards, buttons, photo, tags.
+     --max-width controls how wide the content column can get on large
+     screens (nav, hero, and every section all share this same value so
+     everything lines up). */
+  --radius: 16px;
+  --max-width: 1040px;
+}
+
+/* Use border-box everywhere so padding/border never break layout widths. */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth; /* smooth-scrolls to sections when a nav link is clicked */
+}
+
+body {
+  margin: 0;
+  font-family: "Times New Roman", Times, serif; /* CUSTOMIZE: change the site-wide font here */
+  background: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.6;
+  font-size: 17px; /* CUSTOMIZE: base font size for the whole site */
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: var(--color-dark-blue);
+}
+
+/* Visually hidden but still readable by screen readers (used for the
+   hamburger menu label). */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* "Skip to main content" link for keyboard/screen-reader users. Hidden
+   until it receives keyboard focus (Tab key), then appears top-left. */
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: 0;
+  background: var(--color-dark-blue);
+  color: #fff;
+  padding: 10px 16px;
+  z-index: 100;
+  border-radius: 0 0 var(--radius) 0;
+}
+
+.skip-link:focus {
+  left: 0;
+}
+
+/* Visible outline whenever any link/button is focused via keyboard. */
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--color-accent-blue);
+  outline-offset: 2px;
+}
+
+/* ==========================================================================
+   HEADER / NAVIGATION
+   Sticky bar pinned to the top of the page with the name + section links.
+   On mobile this collapses into a hamburger menu (see the 800px media
+   query near the bottom of this file, and script.js for the toggle logic).
+   ========================================================================== */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
+  z-index: 50;
+}
+
+.nav {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav__brand {
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: var(--color-dark-blue);
+  text-decoration: none;
+}
+
+.nav__menu {
+  list-style: none;
+  display: flex;
+  gap: 24px;
+  margin: 0;
+  padding: 0;
+}
+
+.nav__menu a {
+  text-decoration: none;
+  color: var(--color-text);
+}
+
+.nav__menu a:hover,
+.nav__menu a:focus-visible {
+  color: var(--color-dark-blue);
+}
+
+/* Hamburger button — hidden on desktop, shown only under 800px
+   (see the responsive section at the bottom of this file). */
+.nav__toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 10px 12px;
+  cursor: pointer;
+}
+
+.nav__toggle-bar {
+  width: 22px;
+  height: 2px;
+  background: var(--color-dark-blue);
+  display: block;
+}
+
+/* ==========================================================================
+   HERO (top banner with photo, name, intro text, and action buttons)
+   ========================================================================== */
+
+.hero {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 56px 24px;
+  display: grid;
+  /* CUSTOMIZE: first value = width of the photo column, "1fr" = the rest
+     of the space goes to the text column. Increase 240px to make the
+     photo COLUMN wider (the photo itself is also controlled below by
+     .hero__photo img { width }). */
+  grid-template-columns: 300px 1fr;
+  gap: 48px;
+  align-items: center;
+}
+
+/* The column/box that wraps the photo. */
+.hero__photo {
+  display: flex;
+  justify-content: flex-start; /* CUSTOMIZE: use "center" to center the photo in its column */
+}
+
+/* The photo itself.
+   We intentionally do NOT force a cropped aspect-ratio here anymore:
+   the image keeps its natural proportions (object-fit/aspect-ratio are
+   left alone) and is simply scaled down to a percentage of its column,
+   so the whole portrait is always visible and never cropped. */
+.hero__photo img {
+  width: 100%;         /* CUSTOMIZE: photo size = this % of the column above (2/3 by default) */
+  height: auto;        /* keeps the photo's natural proportions, avoids cropping */
+  border-radius: var(--radius);
+  border: 1px solid var(--color-border);
+}
+
+.hero__eyebrow {
+  color: var(--color-accent-blue);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.85rem;
+  margin: 0 0 8px;
+}
+
+.hero h1 {
+  margin: 0 0 8px;
+  font-size: 2.4rem; /* CUSTOMIZE: name size */
+  color: var(--color-dark-blue);
+}
+
+.hero__location {
+  margin: 0 0 20px;
+  color: var(--color-text-secondary);
+}
+
+.hero__intro {
+  margin: 0 0 28px;
+  max-width: none; /* intro text spans the full text column width, matching other sections */
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+/* ==========================================================================
+   BUTTONS
+   Reused everywhere: hero actions, CityHub links, "View/Download" links.
+   ========================================================================== */
+
+.btn {
+  display: inline-block;
+  padding: 12px 22px;
+  border-radius: var(--radius);
+  text-decoration: none;
+  font-size: 0.95rem;
+  border: 1px solid transparent;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+/* Solid dark-blue button (main calls to action, e.g. "View CityHub"). */
+.btn--primary {
+  background: var(--color-dark-blue);
+  color: #fff;
+}
+
+.btn--primary:hover,
+.btn--primary:focus-visible {
+  background: var(--color-accent-blue);
+}
+
+/* Pale-blue outline button (secondary actions, e.g. "LinkedIn", "Contact Me"). */
+.btn--secondary {
+  background: var(--color-card-bg);
+  color: var(--color-dark-blue);
+  border-color: var(--color-border);
+}
+
+.btn--secondary:hover,
+.btn--secondary:focus-visible {
+  background: var(--color-card-bg-alt);
+}
+
+/* Smaller variant used under certification cards ("View Certificate"). */
+.btn--small {
+  padding: 8px 16px;
+  font-size: 0.85rem;
+  margin-top: 12px;
+}
+
+/* ==========================================================================
+   GENERIC SECTION LAYOUT
+   Every <section class="section"> (About, Experience, CityHub, Education,
+   Skills, Contact) shares this same width/padding/divider treatment so the
+   page reads consistently from top to bottom.
+   ========================================================================== */
+
+.section {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 48px 24px;
+  border-top: 1px solid var(--color-border); /* thin divider between sections */
+}
+
+.section__title {
+  color: var(--color-dark-blue);
+  font-size: 1.7rem; /* CUSTOMIZE: section heading size (About, Experience, ...) */
+  margin: 0 0 24px;
+}
+
+.section__subtitle {
+  color: var(--color-dark-blue);
+  font-size: 1.15rem; /* smaller heading used for sub-groups, e.g. "Certifications" */
+  margin: 32px 0 16px;
+}
+
+.section__body p {
+  max-width: none; /* paragraphs span the full section width, matching hero/cards */
+  margin: 0 0 16px;
+}
+
+/* ==========================================================================
+   TAGS (Core Strengths, Tools & Methods, Languages)
+   Small rounded pill labels, no percentages/progress bars by design.
+   ========================================================================== */
+
+.tag-grid {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 0;
+  margin: 0;
+}
+
+.tag {
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 10px 18px;
+  font-size: 0.95rem;
+}
+
+/* Lighter/white variant used for Tools & Languages (visually secondary
+   to the Core Strengths tags above them). */
+.tag--muted {
+  background: #fff;
+  color: var(--color-text-secondary);
+}
+
+/* ==========================================================================
+   CARDS
+   Shared box style used for the Experience entry, the CityHub project
+   block, Education, and each Certification.
+   ========================================================================== */
+
+.card {
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 28px; /* CUSTOMIZE: inner spacing of every card */
+  margin-bottom: 20px;
+}
+
+/* Side-by-side card layout used for the two Certification cards. Cards
+   wrap to a single column automatically on narrow screens. */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+/* Responsive embed box for the Google Drive certificate previews
+   (keeps a fixed 4:3 shape at any screen width). */
+.cert-embed {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3; /* CUSTOMIZE: change the shape of the certificate preview box */
+  margin: 14px 0;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  background: #fff;
+}
+
+.cert-embed iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.card h3,
+.card h4 {
+  margin: 0 0 6px;
+  color: var(--color-dark-blue);
+}
+
+.card__org {
+  margin: 0 0 4px;
+  font-weight: bold;
+}
+
+.card__meta-inline {
+  margin: 0 0 12px;
+  color: var(--color-text-secondary);
+  font-size: 0.9rem;
+}
+
+/* Experience card header: role/company on the left, dates on the right. */
+.card__head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.card__meta {
+  color: var(--color-text-secondary);
+  font-size: 0.9rem;
+  text-align: right;
+}
+
+.card__meta p {
+  margin: 0;
+}
+
+.card__list {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.card__list li {
+  margin-bottom: 10px;
+}
+
+.card__note {
+  color: var(--color-text-secondary);
+  font-size: 0.92rem;
+}
+
+/* "Educational Portfolio Project" label above the CityHub heading. */
+.badge {
+  display: inline-block;
+  background: var(--color-dark-blue);
+  color: #fff;
+  border-radius: var(--radius);
+  padding: 6px 14px;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+/* The 4 mini-boxes grouping CityHub artifacts (Initiation & Requirements,
+   Scope & Responsibility, Planning & Control, Presentation). */
+.artifact-groups {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin: 20px 0;
+}
+
+.artifact-group {
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+}
+
+.artifact-group h4 {
+  margin: 0 0 8px;
+  font-size: 1rem;
+}
+
+.artifact-group p {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: 0.92rem;
+}
+
+/* Collapsible "View all project artifacts" box (uses the native
+   <details>/<summary> HTML elements, no JavaScript needed). */
+.artifact-details {
+  margin-top: 20px;
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+}
+
+.artifact-details summary {
+  cursor: pointer;
+  color: var(--color-dark-blue);
+  font-weight: bold;
+}
+
+.artifact-full-list {
+  margin: 16px 0 0;
+  padding-left: 20px;
+}
+
+.artifact-full-list li {
+  margin-bottom: 8px;
+}
+
+/* Contact section card: details list on the left, "Download CV" button
+   on the right (stacks on narrow screens). */
+.contact-card {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+}
+
+.contact-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.contact-label {
+  display: inline-block;
+  min-width: 110px;
+  color: var(--color-text-secondary);
+}
+
+/* ==========================================================================
+   FOOTER
+   ========================================================================== */
+
+.site-footer {
+  text-align: center;
+  padding: 32px 24px;
+  color: var(--color-text-secondary);
+  font-size: 0.9rem;
+  border-top: 1px solid var(--color-border);
+}
+
+/* ==========================================================================
+   RESPONSIVE BREAKPOINTS
+   Two breakpoints: 800px (tablet — hero stacks, hamburger menu appears)
+   and 480px (small phones — tighter spacing/font sizes).
+   ========================================================================== */
+
+@media (max-width: 800px) {
+  .hero {
+    grid-template-columns: 1fr; /* photo stacks above the text on tablet/mobile */
+    text-align: left;
+    padding-top: 40px;
+  }
+
+  .hero__photo {
+    max-width: 220px; /* CUSTOMIZE: max photo column width on tablet/mobile */
+  }
+
+  /* Mobile dropdown menu, toggled by script.js adding/removing "is-open". */
+  .nav__menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--color-bg);
+    border-bottom: 1px solid var(--color-border);
+    flex-direction: column;
+    padding: 16px 24px;
+    gap: 16px;
+    display: none;
+  }
+
+  .nav__menu.is-open {
+    display: flex;
+  }
+
+  .nav__toggle {
+    display: flex;
+  }
+
+  .card__head {
+    flex-direction: column;
+  }
+
+  .card__meta {
+    text-align: left;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    font-size: 16px;
+  }
+
+  .hero h1 {
+    font-size: 1.9rem;
+  }
+
+  .section {
+    padding: 36px 16px;
+  }
+}
+
+/* Respect the OS-level "reduce motion" accessibility setting. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  * {
+    transition: none !important;
+  }
+}

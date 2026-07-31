@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<!--
+  TETIANA DONCHENKO — RESUME WEBSITE
+  ===================================
+  Single static page, no build tools required. Structure:
+    <head>   - page title, description, social preview (Open Graph) tags
+    <header> - sticky top navigation (About / Experience / CityHub / ...)
+    <main>   - Hero, About, Core Strengths, Experience, CityHub, Education,
+               Certifications, Contact (each wrapped in its own <section>)
+    <footer> - copyright line
+
+  All visual styling lives in styles.css (colors, fonts, spacing, photo
+  size, etc. are documented there). The only JavaScript is script.js,
+  which just opens/closes the mobile hamburger menu — nothing else on
+  the page depends on JavaScript.
+
+  To update TEXT: edit the words directly between the HTML tags below.
+  To update LINKS (CV, LinkedIn, Telegram, CityHub docs, certificates):
+  search for the matching href="..." value and replace the URL.
+  To swap the PHOTO or CV file: replace the files in /assets using the
+  exact same filenames, or update the src="assets/..." / href="assets/..."
+  paths below to match your new filenames.
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tetiana Donchenko — Junior Project Manager</title>
+<meta name="description" content="Tetiana Donchenko — Junior Project Manager and Project Coordinator based in Boryspil, Ukraine. Nearly 11 years coordinating educational and operational processes, formal PM and Scrum training, and the CityHub portfolio project.">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Tetiana Donchenko — Junior Project Manager">
+<meta property="og:description" content="Coordination-focused professional transitioning into IT Project Management. Formal PM and Scrum training, plus the CityHub educational portfolio project.">
+<meta property="og:image" content="assets/tetiana-portrait.jpg">
+
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<header class="site-header">
+  <nav class="nav" aria-label="Primary">
+    <a class="nav__brand" href="#top">Tetiana Donchenko</a>
+    <button class="nav__toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu">
+      <span class="nav__toggle-bar"></span>
+      <span class="nav__toggle-bar"></span>
+      <span class="nav__toggle-bar"></span>
+      <span class="sr-only">Menu</span>
+    </button>
+    <ul class="nav__menu" id="navMenu">
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#cityhub">CityHub</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main id="main">
+
+  <!--
+    HERO
+    Photo (left) + name/intro/buttons (right).
+    Photo size/behavior is controlled in styles.css under ".hero__photo"
+    and ".hero__photo img" — see the comments there if the photo needs
+    to be bigger/smaller or the column width changed.
+    The 4 buttons below link to: CityHub section, the CV PDF (downloads),
+    LinkedIn (opens in a new tab), and the Contact section.
+  -->
+  <section class="hero" id="top">
+    <div class="hero__photo">
+      <img src="assets/tetiana-portrait.jpg" alt="Portrait of Tetiana Donchenko" width="480" height="600">
+    </div>
+    <div class="hero__content">
+      <p class="hero__eyebrow">Junior Project Manager</p>
+      <h1>Tetiana Donchenko</h1>
+      <p class="hero__location">Boryspil, Kyiv Region, Ukraine · Remote / Hybrid</p>
+      <p class="hero__intro">My experience is in organizing and coordinating educational and operational processes in online IT education. I am currently developing my skills and career in IT Project Management after completing formal PM and Scrum training and independently completing the CityHub educational portfolio project.</p>
+      <div class="hero__actions">
+        <a class="btn btn--primary" href="#cityhub">View CityHub</a>
+        <a class="btn btn--secondary" href="assets/CV_Tetiana_Donchenko_Junior_Project_Manager_EN.pdf" download>Download CV</a>
+        <a class="btn btn--secondary" href="https://www.linkedin.com/in/tetiana-donchenko-588a44184/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a class="btn btn--secondary" href="#contact">Contact Me</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT — short bio, edit the three <p> paragraphs directly. -->
+  <section class="section" id="about">
+    <h2 class="section__title">About</h2>
+    <div class="section__body">
+      <p>For nearly 11 years, I have organized and coordinated the educational and operational process at an online IT education company, working with multiple study groups at once and keeping schedules, documentation, and communication running smoothly between instructors, students, sales managers, and accounting.</p>
+      <p>I am now building on that foundation to move into IT Project Management. I completed the Project Management with AI course at Hillel IT School and hold a Scrum Fundamentals Certified (SFC™) credential, and I independently developed a full set of planning and documentation artifacts for CityHub, an educational portfolio project.</p>
+      <p>I am looking for Junior Project Manager or Project Coordinator opportunities where I can apply my coordination experience and continue growing my project management skills.</p>
+    </div>
+  </section>
+
+  <!--
+    CORE STRENGTHS / TOOLS / LANGUAGES
+    Each <li class="tag"> is one pill. To add or remove a skill, tool,
+    or language, just add/delete an <li> line in the matching list below.
+  -->
+  <section class="section" id="skills">
+    <h2 class="section__title">Core Strengths</h2>
+    <ul class="tag-grid">
+      <li class="tag">Project Coordination</li>
+      <li class="tag">Schedule Planning</li>
+      <li class="tag">Document Management</li>
+      <li class="tag">Cross-Functional Communication</li>
+      <li class="tag">Time Management</li>
+      <li class="tag">Organizational Skills</li>
+      <li class="tag">Problem Solving</li>
+      <li class="tag">Managing Multiple Priorities</li>
+    </ul>
+
+    <h3 class="section__subtitle">Tools &amp; Methods</h3>
+    <ul class="tag-grid tag-grid--muted">
+      <li class="tag tag--muted">Jira — basic</li>
+      <li class="tag tag--muted">Confluence — basic</li>
+      <li class="tag tag--muted">Trello</li>
+      <li class="tag tag--muted">Kommo CRM</li>
+      <li class="tag tag--muted">Learning Management Systems</li>
+      <li class="tag tag--muted">Microsoft Office</li>
+      <li class="tag tag--muted">Google Docs</li>
+      <li class="tag tag--muted">Google Sheets</li>
+      <li class="tag tag--muted">Agile Principles</li>
+      <li class="tag tag--muted">Scrum</li>
+    </ul>
+
+    <h3 class="section__subtitle">Technical Basics</h3>
+    <ul class="tag-grid tag-grid--muted">
+      <li class="tag tag--muted">HTML — basic</li>
+      <li class="tag tag--muted">CSS — basic</li>
+      <li class="tag tag--muted">Python — basic familiarity</li>
+      <li class="tag tag--muted">Java — basic familiarity</li>
+    </ul>
+
+    <h3 class="section__subtitle">Languages</h3>
+    <ul class="tag-grid tag-grid--muted">
+      <li class="tag tag--muted">Ukrainian — Native</li>
+      <li class="tag tag--muted">English — B1</li>
+      <li class="tag tag--muted">Russian — Fluent</li>
+    </ul>
+  </section>
+
+  <!--
+    EXPERIENCE
+    One card = one job. To add another role later, copy the whole
+    <article class="card card--experience">...</article> block and edit it.
+  -->
+  <section class="section" id="experience">
+    <h2 class="section__title">Professional Experience</h2>
+    <article class="card card--experience">
+      <div class="card__head">
+        <div>
+          <h3>Administrator / Educational Process Coordinator</h3>
+          <p class="card__org">Prog Academy — Online IT Education</p>
+        </div>
+        <div class="card__meta">
+          <p>March 2015 – January 2026</p>
+          <p>Primarily remote</p>
+        </div>
+      </div>
+      <ul class="card__list">
+        <li>Coordinated the educational process for multiple study groups simultaneously, including scheduling and schedule-change coordination with instructors.</li>
+        <li>Supported new group launches and resolved day-to-day organizational issues to keep operations running smoothly.</li>
+        <li>Served as the primary point of contact between sales managers, instructors, accounting, and students.</li>
+        <li>Managed internal documentation and reports, and monitored tuition payments against internal records.</li>
+        <li>Maintained student records and statuses in Kommo CRM and the Learning Management System (LMS).</li>
+        <li>Coordinated the preparation of contracts and commercial offers, and organized certificate and platform access.</li>
+      </ul>
+    </article>
+  </section>
+
+  <!--
+    CITYHUB (Featured Project)
+    - The 4 grouped boxes below just list artifact names as text (no links).
+    - The 4 highlighted buttons link to the most important documents.
+    - The <details>/<summary> block below that is a native, JS-free
+      "expand to see more" list with every artifact link from
+      07_Artifacts.md. Add/remove <li> lines there to update it.
+  -->
+  <section class="section" id="cityhub">
+    <h2 class="section__title">Featured Project</h2>
+    <article class="card card--project">
+      <span class="badge">Educational Portfolio Project</span>
+      <h3>CityHub — Unified Information Platform of Ukraine's Settlements</h3>
+      <p class="card__org">Role: Project Manager (Educational Project) · Project Management with AI, Hillel IT School</p>
+
+      <p>CityHub was completed independently as the final assignment for the Project Management with AI course. It is a concept for a unified web platform that would organize information about Ukrainian settlements — public institutions, local businesses, and infrastructure — for citizens, IDPs, tourists, and communities. No platform was built or launched, there was no client engagement, and no real project team was managed; this is an educational demonstration of project planning and documentation skills, not a commercial project.</p>
+
+      <p>The work covered the planning and documentation stages of a project lifecycle, from initiation through MVP planning, producing a structured set of PM artifacts grouped below.</p>
+
+      <div class="artifact-groups">
+        <div class="artifact-group">
+          <h4>Initiation &amp; Requirements</h4>
+          <p>Project Charter · Stakeholder Matrix · Software Requirements Specification</p>
+        </div>
+        <div class="artifact-group">
+          <h4>Scope &amp; Responsibility</h4>
+          <p>Work Breakdown Structure · RACI Matrix · MoSCoW Prioritization · User Mapping</p>
+        </div>
+        <div class="artifact-group">
+          <h4>Planning &amp; Control</h4>
+          <p>Gantt Chart · Resource Plan · Communication Plan · Budget · Risk Register</p>
+        </div>
+        <div class="artifact-group">
+          <h4>Presentation</h4>
+          <p>Final Project Presentation</p>
+        </div>
+      </div>
+
+      <p class="card__note">Basic portfolio-level familiarity with Jira and Confluence was developed while working on backlog structure and centralized documentation; this work is still in progress.</p>
+
+      <div class="hero__actions">
+        <a class="btn btn--primary" href="https://docs.google.com/document/d/1FrG61ZIyFxQ7JBoT3jIEdAyrppXVNqJF" target="_blank" rel="noopener noreferrer">Project Charter</a>
+        <a class="btn btn--primary" href="https://docs.google.com/document/d/16hrPLxl54KjU4VZwVyFnXIZcAnaGNFHf" target="_blank" rel="noopener noreferrer">Requirements Spec</a>
+        <a class="btn btn--primary" href="https://docs.google.com/spreadsheets/d/1XuH4HJ-mKohka1R2aOTxtnmUvLszx1BX" target="_blank" rel="noopener noreferrer">Gantt Chart</a>
+        <a class="btn btn--primary" href="https://docs.google.com/presentation/d/1O_CmOKrIo4q6h6UnmBXQeDx4OZE6z7b3" target="_blank" rel="noopener noreferrer">Presentation</a>
+      </div>
+
+      <details class="artifact-details">
+        <summary>View all project artifacts</summary>
+        <ul class="artifact-full-list">
+          <li><a href="https://docs.google.com/document/d/1FrG61ZIyFxQ7JBoT3jIEdAyrppXVNqJF" target="_blank" rel="noopener noreferrer">Project Charter</a></li>
+          <li><a href="https://docs.google.com/document/d/1Dm3GXu02_jZR70VPIHxvDrsOsdjcMuob" target="_blank" rel="noopener noreferrer">Stakeholder Matrix</a></li>
+          <li><a href="https://docs.google.com/document/d/16hrPLxl54KjU4VZwVyFnXIZcAnaGNFHf" target="_blank" rel="noopener noreferrer">Software Requirements Specification</a></li>
+          <li><a href="https://docs.google.com/document/d/15vMGz93rnLLeQMJbJQC86NOxbbSyv7Ya" target="_blank" rel="noopener noreferrer">User Mapping</a></li>
+          <li><a href="https://docs.google.com/document/d/1tXoAqDWWOrBtgPCSC90I1qPR_nSDzyFD" target="_blank" rel="noopener noreferrer">MoSCoW Prioritization</a></li>
+          <li><a href="https://docs.google.com/document/d/1BPlXH8GQyCgMyVVUXjZT5fMruiLGUOGh" target="_blank" rel="noopener noreferrer">Work Breakdown Structure (WBS)</a></li>
+          <li><a href="https://docs.google.com/document/d/1JpX-UTiO8mGypfAYbxzX20iBC5ftsCMs" target="_blank" rel="noopener noreferrer">RACI Matrix</a></li>
+          <li><a href="https://docs.google.com/spreadsheets/d/1XuH4HJ-mKohka1R2aOTxtnmUvLszx1BX" target="_blank" rel="noopener noreferrer">Gantt Chart</a></li>
+          <li><a href="https://docs.google.com/spreadsheets/d/1bjVP0Ml5AkKBFCSEUCDVBRzM4q6_km_u" target="_blank" rel="noopener noreferrer">Resource Plan</a></li>
+          <li><a href="https://docs.google.com/document/d/15-_fWNc7XuwrciclaWwOElu49egtdkFD" target="_blank" rel="noopener noreferrer">Communication Plan</a></li>
+          <li><a href="https://docs.google.com/spreadsheets/d/1b-fNLvq5K-8WgHIT_G062RJJwNNgkvLC" target="_blank" rel="noopener noreferrer">Budget</a></li>
+          <li><a href="https://docs.google.com/document/d/1zG7YHt7ATMs9q-JKiEC1JEn_TH5_16_D" target="_blank" rel="noopener noreferrer">Risk Register</a></li>
+          <li><a href="https://docs.google.com/presentation/d/1O_CmOKrIo4q6h6UnmBXQeDx4OZE6z7b3" target="_blank" rel="noopener noreferrer">Final Project Presentation</a></li>
+        </ul>
+        <p class="card__note">Jira and Confluence materials are in progress and are not yet public.</p>
+      </details>
+    </article>
+  </section>
+
+  <!--
+    EDUCATION + CERTIFICATIONS
+    Each certification card embeds a live Google Drive preview (<iframe>).
+    IMPORTANT: for the preview to load for visitors, the Google Drive file
+    must be shared as "Anyone with the link can view" — otherwise the
+    embed shows an access-denied message instead of the certificate.
+  -->
+  <section class="section" id="education">
+    <h2 class="section__title">Education</h2>
+    <article class="card">
+      <h3>Volodymyr Dahl East Ukrainian National University</h3>
+      <p class="card__org">Master's Degree (Honours), Physics</p>
+      <p class="card__meta-inline">2009–2014</p>
+    </article>
+
+    <h3 class="section__subtitle">Certifications</h3>
+    <div class="card-grid">
+      <article class="card">
+        <h4>Project Management with AI</h4>
+        <p class="card__org">Hillel IT School</p>
+        <p class="card__meta-inline">Issued 2026 · Certificate No. 73351631</p>
+        <div class="cert-embed">
+          <iframe src="https://drive.google.com/file/d/1d3-FfEjuaN6FxTL95BJPsppOc6cUblO3/preview" title="Project Management with AI certificate preview" loading="lazy" allow="autoplay"></iframe>
+        </div>
+        <a class="btn btn--secondary btn--small" href="https://certificate.ithillel.ua/view/73351631" target="_blank" rel="noopener noreferrer">View Certificate</a>
+      </article>
+      <article class="card">
+        <h4>Scrum Fundamentals Certified (SFC™)</h4>
+        <p class="card__org">SCRUMstudy / VMEdu, Inc.</p>
+        <p class="card__meta-inline">Issued June 2026 · Certificate ID 1172086</p>
+        <div class="cert-embed">
+          <iframe src="https://drive.google.com/file/d/1FGX7n9IBcxRMNYxbEvgIFSD5TSk_NymT/preview" title="Scrum Fundamentals Certified certificate preview" loading="lazy" allow="autoplay"></iframe>
+        </div>
+        <a class="btn btn--secondary btn--small" href="https://drive.google.com/file/d/1FGX7n9IBcxRMNYxbEvgIFSD5TSk_NymT/view" target="_blank" rel="noopener noreferrer">View Certificate</a>
+      </article>
+    </div>
+  </section>
+
+  <!-- CONTACT — edit the email/LinkedIn/Telegram links directly below. -->
+  <section class="section" id="contact">
+    <h2 class="section__title">Contact</h2>
+    <div class="card contact-card">
+      <ul class="contact-list">
+        <li><span class="contact-label">Email</span> <a href="mailto:tssavdon@gmail.com">tssavdon@gmail.com</a></li>
+        <li><span class="contact-label">LinkedIn</span> <a href="https://www.linkedin.com/in/tetiana-donchenko-588a44184/" target="_blank" rel="noopener noreferrer">linkedin.com/in/tetiana-donchenko</a></li>
+        <li><span class="contact-label">Telegram</span> <a href="https://t.me/TSSavDon" target="_blank" rel="noopener noreferrer">@TSSavDon</a></li>
+        <li><span class="contact-label">Location</span> Boryspil, Kyiv Region, Ukraine</li>
+        <li><span class="contact-label">Availability</span> Remote / Hybrid</li>
+      </ul>
+      <a class="btn btn--primary" href="assets/CV_Tetiana_Donchenko_Junior_Project_Manager_EN.pdf" download>Download CV</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <p>© 2026 Tetiana Donchenko</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
