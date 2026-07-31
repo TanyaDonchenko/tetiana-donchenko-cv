@@ -16,15 +16,20 @@
 
 :root {
   /* ---- Colors -----------------------------------------------------------
-     Change these hex values to re-theme the entire site. */
+     Change these hex values to re-theme the entire site. These are the
+     LIGHT theme values (the default / approved design). Dark theme
+     overrides for every one of these variables live further down in the
+     "[data-theme="dark"]" block — search for THEME to jump there. */
   --color-bg: #FFFFFF;              /* page background */
-  --color-text: #3A3A3A;            /* main body text color */
-  --color-text-secondary: #707070;  /* muted/secondary text (dates, notes) */
-  --color-dark-blue: #13426E;       /* headings, nav brand, primary buttons */
-  --color-accent-blue: #5B9BD5;     /* eyebrow label, hover states, focus ring */
-  --color-card-bg: #EAF1FA;         /* light blue card background */
-  --color-card-bg-alt: #DDE9F6;     /* slightly darker card background (hover) */
-  --color-border: #DDE3EA;          /* thin borders/dividers everywhere */
+  --color-surface: #FFFFFF;         /* "white" card surfaces: muted tags, artifact boxes, cert preview frame */
+  --color-text: #2F2F2F;            /* main body text color */
+  --color-text-secondary: #66717D;  /* muted/secondary text (dates, notes) */
+  --color-dark-blue: #123F6B;       /* headings, nav brand, primary buttons */
+  --color-accent-blue: #4F95D1;     /* hover states, focus ring, icon accents */
+  --color-card-bg: #EDF4FB;         /* light blue card background */
+  --color-card-bg-alt: #DCEAF7;     /* slightly darker card background (hover) */
+  --color-border: #CBD8E6;          /* thin borders/dividers everywhere */
+  --color-on-accent: #FFFFFF;       /* text color used ON TOP OF --color-dark-blue (buttons, badge, skip-link) */
 
   /* ---- Shape & Layout ----------------------------------------------------
      --radius controls the rounded corners on cards, buttons, photo, tags.
@@ -33,6 +38,37 @@
      everything lines up). */
   --radius: 16px;
   --max-width: 1040px;
+}
+
+/* ==========================================================================
+   THEME: DARK MODE
+   Overrides every color variable above when the <html> element has
+   data-theme="dark" — set by script.js, either from the visitor's saved
+   choice (localStorage) or from their OS preference on first visit.
+   The light theme above is untouched and remains the default.
+   ========================================================================== */
+html[data-theme="dark"] {
+  --color-bg: #171A1F;
+  --color-surface: #20252C;
+  --color-text: #E7E9EC;
+  --color-text-secondary: #B5BBC3;
+  --color-dark-blue: #8CBCE8;
+  --color-accent-blue: #69AEE8;
+  --color-card-bg: #222A33;
+  --color-card-bg-alt: #293440;
+  --color-border: #39424D;
+  --color-on-accent: #12161B; /* dark text on the light-blue accent buttons/badge, kept readable */
+}
+
+/* Smooth, simple color transition when switching themes (no motion for
+   users who have "reduce motion" turned on — see bottom of this file). */
+body,
+.site-header,
+.card,
+.tag,
+.btn,
+.theme-toggle {
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 
 /* Use border-box everywhere so padding/border never break layout widths. */
@@ -51,6 +87,7 @@ body {
   color: var(--color-text);
   line-height: 1.6;
   font-size: 17px; /* CUSTOMIZE: base font size for the whole site */
+  overflow-x: hidden; /* safety net: nothing on the page should cause horizontal scrolling */
 }
 
 img {
@@ -60,6 +97,27 @@ img {
 
 a {
   color: var(--color-dark-blue);
+}
+
+/* ==========================================================================
+   ICONS
+   One consistent inline icon style used everywhere (see the hidden
+   <symbol> sprite at the top of index.html for the actual icon shapes).
+   Every icon on the page is decorative — the text label next to it
+   already explains the control — so icons never carry their own
+   accessible name; that's handled in the HTML with aria-hidden="true".
+   ========================================================================== */
+
+.icon {
+  width: 16px;   /* CUSTOMIZE: icon size, used everywhere icons appear */
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
+  vertical-align: -3px;
 }
 
 /* Visually hidden but still readable by screen readers (used for the
@@ -83,7 +141,7 @@ a {
   left: -999px;
   top: 0;
   background: var(--color-dark-blue);
-  color: #fff;
+  color: var(--color-on-accent);
   padding: 10px 16px;
   z-index: 100;
   border-radius: 0 0 var(--radius) 0;
@@ -121,7 +179,8 @@ button:focus-visible {
   padding: 16px 24px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px 32px;
 }
 
 .nav__brand {
@@ -147,6 +206,50 @@ button:focus-visible {
 .nav__menu a:hover,
 .nav__menu a:focus-visible {
   color: var(--color-dark-blue);
+}
+
+/* Groups the theme toggle and the mobile hamburger together and pushes
+   them to the far right of the nav bar via margin-left: auto. */
+.nav__controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-left: auto;
+}
+
+/* Compact light/dark theme switch button. */
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 8px 14px;
+  cursor: pointer;
+  color: var(--color-dark-blue);
+  font-family: inherit;
+  font-size: 0.85rem;
+}
+
+.theme-toggle:hover {
+  background: var(--color-card-bg-alt);
+}
+
+/* Sun/moon icon swap: both icons are always in the markup, CSS shows
+   only the one that matches the current state via the button's own
+   aria-pressed attribute — no extra JS classes needed. Sun = light
+   theme active (click to go dark), Moon = dark theme active. */
+.theme-toggle__icon--moon {
+  display: none;
+}
+
+.theme-toggle[aria-pressed="true"] .theme-toggle__icon--sun {
+  display: none;
+}
+
+.theme-toggle[aria-pressed="true"] .theme-toggle__icon--moon {
+  display: inline-block;
 }
 
 /* Hamburger button — hidden on desktop, shown only under 800px
@@ -178,39 +281,43 @@ button:focus-visible {
   margin: 0 auto;
   padding: 56px 24px;
   display: grid;
-  /* CUSTOMIZE: first value = width of the photo column, "1fr" = the rest
-     of the space goes to the text column. Increase 240px to make the
-     photo COLUMN wider (the photo itself is also controlled below by
-     .hero__photo img { width }). */
-  grid-template-columns: 300px 1fr;
+  /* CUSTOMIZE: first value = photo width on DESKTOP (~230-250px target),
+     "1fr" = the rest of the space goes to the text column. This is the
+     desktop/base rule; the 800px media query below overrides it for
+     tablet/mobile with its own separate photo-size rules. */
+  grid-template-columns: 240px 1fr;
   gap: 48px;
   align-items: center;
+  scroll-margin-top: 90px; /* keeps the same sticky-header offset as .section, for the nav brand's "#top" link */
 }
 
-/* The column/box that wraps the photo. */
+/* The column/box that wraps the photo. Sized to the desktop target
+   width (~240px); the image below fills it at width: 100%, so the
+   rendered photo size is controlled right here, in one place per
+   breakpoint, rather than as a percentage of a percentage. */
 .hero__photo {
-  display: flex;
-  justify-content: flex-start; /* CUSTOMIZE: use "center" to center the photo in its column */
+  width: 100%;
+  max-width: 240px; /* CUSTOMIZE: desktop photo width, keep within ~230-250px */
+  margin-inline: 0;
 }
 
 /* The photo itself.
-   We intentionally do NOT force a cropped aspect-ratio here anymore:
-   the image keeps its natural proportions (object-fit/aspect-ratio are
-   left alone) and is simply scaled down to a percentage of its column,
-   so the whole portrait is always visible and never cropped. */
+   We intentionally do NOT force a cropped aspect-ratio here: the image
+   keeps its natural proportions (object-fit/aspect-ratio are left
+   alone) and simply fills its container (.hero__photo above), so the
+   whole portrait is always visible and never cropped. */
 .hero__photo img {
-  width: 100%;         /* CUSTOMIZE: photo size = this % of the column above (2/3 by default) */
+  width: 100%;
   height: auto;        /* keeps the photo's natural proportions, avoids cropping */
   border-radius: var(--radius);
   border: 1px solid var(--color-border);
 }
 
-.hero__eyebrow {
+.hero__role {
   color: var(--color-accent-blue);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  font-size: 0.85rem;
-  margin: 0 0 8px;
+  font-size: 1.15rem;
+  font-weight: bold;
+  margin: 0 0 12px;
 }
 
 .hero h1 {
@@ -220,6 +327,9 @@ button:focus-visible {
 }
 
 .hero__location {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   margin: 0 0 20px;
   color: var(--color-text-secondary);
 }
@@ -242,7 +352,9 @@ button:focus-visible {
    ========================================================================== */
 
 .btn {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   padding: 12px 22px;
   border-radius: var(--radius);
   text-decoration: none;
@@ -254,7 +366,7 @@ button:focus-visible {
 /* Solid dark-blue button (main calls to action, e.g. "View CityHub"). */
 .btn--primary {
   background: var(--color-dark-blue);
-  color: #fff;
+  color: var(--color-on-accent);
 }
 
 .btn--primary:hover,
@@ -293,6 +405,7 @@ button:focus-visible {
   margin: 0 auto;
   padding: 48px 24px;
   border-top: 1px solid var(--color-border); /* thin divider between sections */
+  scroll-margin-top: 90px; /* CUSTOMIZE: keep in sync with .site-header's actual height, so the sticky nav never clips the heading when a nav link jumps here */
 }
 
 .section__title {
@@ -305,6 +418,13 @@ button:focus-visible {
   color: var(--color-dark-blue);
   font-size: 1.15rem; /* smaller heading used for sub-groups, e.g. "Certifications" */
   margin: 32px 0 16px;
+}
+
+/* Used on the first subsection heading right after a section title
+   (e.g. "Core Strengths" under "Skills") so it doesn't get the same
+   large top margin used to separate later subsections from each other. */
+.section__subtitle--first {
+  margin-top: 0;
 }
 
 .section__body p {
@@ -335,10 +455,12 @@ button:focus-visible {
 }
 
 /* Lighter/white variant used for Tools & Languages (visually secondary
-   to the Core Strengths tags above them). */
+   to the Core Strengths tags above them). Text uses --color-text (not
+   --color-text-secondary) so the names stay readable/dark, while the
+   white background still keeps this variant visually distinct. */
 .tag--muted {
-  background: #fff;
-  color: var(--color-text-secondary);
+  background: var(--color-surface);
+  color: var(--color-text);
 }
 
 /* ==========================================================================
@@ -373,7 +495,7 @@ button:focus-visible {
   border-radius: var(--radius);
   overflow: hidden;
   border: 1px solid var(--color-border);
-  background: #fff;
+  background: var(--color-surface);
 }
 
 .cert-embed iframe {
@@ -438,7 +560,7 @@ button:focus-visible {
 .badge {
   display: inline-block;
   background: var(--color-dark-blue);
-  color: #fff;
+  color: var(--color-on-accent);
   border-radius: var(--radius);
   padding: 6px 14px;
   font-size: 0.8rem;
@@ -457,7 +579,7 @@ button:focus-visible {
 }
 
 .artifact-group {
-  background: #fff;
+  background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius);
   padding: 16px 18px;
@@ -478,7 +600,7 @@ button:focus-visible {
    <details>/<summary> HTML elements, no JavaScript needed). */
 .artifact-details {
   margin-top: 20px;
-  background: #fff;
+  background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius);
   padding: 16px 20px;
@@ -517,6 +639,12 @@ button:focus-visible {
   gap: 10px;
 }
 
+.contact-list li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .contact-label {
   display: inline-block;
   min-width: 110px;
@@ -544,12 +672,25 @@ button:focus-visible {
 @media (max-width: 800px) {
   .hero {
     grid-template-columns: 1fr; /* photo stacks above the text on tablet/mobile */
-    text-align: left;
-    padding-top: 40px;
+    text-align: center;
+    gap: 22px;
+    padding: 32px 16px 40px;
   }
 
   .hero__photo {
-    max-width: 220px; /* CUSTOMIZE: max photo column width on tablet/mobile */
+    max-width: 175px; /* CUSTOMIZE: mobile photo width, target ~170-180px */
+    width: 100%;
+    margin-inline: auto;
+  }
+
+  .hero__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero__actions {
+    justify-content: center;
   }
 
   /* Mobile dropdown menu, toggled by script.js adding/removing "is-open". */
@@ -580,6 +721,12 @@ button:focus-visible {
 
   .card__meta {
     text-align: left;
+  }
+}
+
+@media (max-width: 380px) {
+  .hero__photo {
+    max-width: 160px; /* target ~155-165px on very narrow phones */
   }
 }
 

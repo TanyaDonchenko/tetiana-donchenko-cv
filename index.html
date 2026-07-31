@@ -10,9 +10,11 @@
     <footer> - copyright line
 
   All visual styling lives in styles.css (colors, fonts, spacing, photo
-  size, etc. are documented there). The only JavaScript is script.js,
-  which just opens/closes the mobile hamburger menu — nothing else on
-  the page depends on JavaScript.
+  size, etc. are documented there, including the light/dark theme
+  variables near the top of that file). script.js handles two things:
+  opening/closing the mobile hamburger menu, and the light/dark theme
+  toggle button in the header — nothing else on the page depends on
+  JavaScript.
 
   To update TEXT: edit the words directly between the HTML tags below.
   To update LINKS (CV, LinkedIn, Telegram, CityHub docs, certificates):
@@ -23,31 +25,146 @@
 -->
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tetiana Donchenko — Junior Project Manager</title>
-<meta name="description" content="Tetiana Donchenko — Junior Project Manager and Project Coordinator based in Boryspil, Ukraine. Nearly 11 years coordinating educational and operational processes, formal PM and Scrum training, and the CityHub portfolio project.">
+  <meta charset="UTF-8">
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Tetiana Donchenko — Junior Project Manager">
-<meta property="og:description" content="Coordination-focused professional transitioning into IT Project Management. Formal PM and Scrum training, plus the CityHub educational portfolio project.">
-<meta property="og:image" content="assets/tetiana-portrait.jpg">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
-<link rel="stylesheet" href="styles.css">
+  <title>Tetiana Donchenko — Junior Project Manager</title>
+
+  <meta
+    name="description"
+    content="Tetiana Donchenko — Junior Project Manager based in Boryspil, Ukraine. Nearly 11 years of experience coordinating educational and operational processes for online IT courses. Now transitioning into IT Project Management after structured PM and Scrum training and the independently planned and documented CityHub educational portfolio project."
+  >
+
+  <link
+    rel="canonical"
+    href="https://tanyadonchenko.github.io/tetiana-donchenko-cv/"
+  >
+
+  <meta property="og:type" content="website">
+
+  <meta
+    property="og:url"
+    content="https://tanyadonchenko.github.io/tetiana-donchenko-cv/"
+  >
+
+  <meta
+    property="og:title"
+    content="Tetiana Donchenko — Junior Project Manager"
+  >
+
+  <meta
+    property="og:description"
+    content="Nearly 11 years of experience coordinating educational and operational processes for online IT courses. Now transitioning into IT Project Management with structured PM and Scrum training and the CityHub educational portfolio project."
+  >
+
+  <meta
+    property="og:image"
+    content="https://tanyadonchenko.github.io/tetiana-donchenko-cv/assets/tetiana-donchenko-og.jpg"
+  >
+
+  <meta
+    property="og:image:secure_url"
+    content="https://tanyadonchenko.github.io/tetiana-donchenko-cv/assets/tetiana-donchenko-og.jpg"
+  >
+
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+
+  <meta
+    property="og:image:alt"
+    content="Tetiana Donchenko — Junior Project Manager portfolio preview"
+  >
+
+  <meta property="og:site_name" content="Tetiana Donchenko Portfolio">
+  <meta property="og:locale" content="en_US">
+
+  <meta name="twitter:card" content="summary_large_image">
+
+  <meta
+    name="twitter:title"
+    content="Tetiana Donchenko — Junior Project Manager"
+  >
+
+  <meta
+    name="twitter:description"
+    content="Nearly 11 years of experience coordinating educational and operational processes for online IT courses. Now transitioning into IT Project Management with structured PM and Scrum training and the CityHub educational portfolio project."
+  >
+
+  <meta
+    name="twitter:image"
+    content="https://tanyadonchenko.github.io/tetiana-donchenko-cv/assets/tetiana-donchenko-og.jpg"
+  >
+
+  <meta
+    name="twitter:image:alt"
+    content="Tetiana Donchenko — Junior Project Manager portfolio preview"
+  >
+
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+
+<!-- Hidden icon sprite: every icon on the page is defined once here as a
+     <symbol> and referenced elsewhere with <svg class="icon"><use href="#icon-name"></use></svg>.
+     This keeps one consistent icon style (thin outline, 24x24, currentColor)
+     without any external icon library or extra requests. All icons used
+     this way are purely decorative (the visible text label next to them
+     already says what the control does), so every reference below is
+     marked aria-hidden="true" and focusable="false". -->
+<svg aria-hidden="true" style="position:absolute; width:0; height:0; overflow:hidden;">
+  <symbol id="icon-pin" viewBox="0 0 24 24">
+    <path d="M12 21s7-7.2 7-12.2A7 7 0 0 0 5 8.8C5 13.8 12 21 12 21Z"/>
+    <circle cx="12" cy="8.8" r="2.4"/>
+  </symbol>
+  <symbol id="icon-download" viewBox="0 0 24 24">
+    <path d="M12 3.5v11"/>
+    <path d="M7.5 10.5 12 15l4.5-4.5"/>
+    <path d="M4.5 16.5v2A2 2 0 0 0 6.5 20.5h11a2 2 0 0 0 2-2v-2"/>
+  </symbol>
+  <symbol id="icon-external" viewBox="0 0 24 24">
+    <path d="M9.5 4.5H5.5A2 2 0 0 0 3.5 6.5v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-4"/>
+    <path d="M13.5 4.5h6v6"/>
+    <path d="M10 14 19.5 4.5"/>
+  </symbol>
+  <symbol id="icon-message" viewBox="0 0 24 24">
+    <path d="M4 5.5h16v11a2 2 0 0 1-2 2H9l-4 3v-3H4a2 2 0 0 1-2-2V7.5a2 2 0 0 1 2-2Z"/>
+  </symbol>
+  <symbol id="icon-mail" viewBox="0 0 24 24">
+    <rect x="3.5" y="5.5" width="17" height="13" rx="2"/>
+    <path d="m4.5 7 7.5 6 7.5-6"/>
+  </symbol>
+  <symbol id="icon-telegram" viewBox="0 0 24 24">
+    <path d="m3.5 12.3 16.4-7.3-2.8 15.5-6.4-4.6-3 2.9-.6-4.3Z"/>
+    <path d="M17 6.5 8.7 13.9"/>
+  </symbol>
+  <symbol id="icon-briefcase" viewBox="0 0 24 24">
+    <rect x="3.5" y="8" width="17" height="11" rx="2"/>
+    <path d="M8.5 8V6a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v2"/>
+    <path d="M3.5 13h17"/>
+  </symbol>
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24">
+    <path d="M4.5 12h15"/>
+    <path d="m13 6 6 6-6 6"/>
+  </symbol>
+  <symbol id="icon-sun" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="4"/>
+    <path d="M12 3v2.2M12 18.8V21M4.9 4.9l1.6 1.6M17.5 17.5l1.6 1.6M3 12h2.2M18.8 12H21M4.9 19.1l1.6-1.6M17.5 6.5l1.6-1.6"/>
+  </symbol>
+  <symbol id="icon-moon" viewBox="0 0 24 24">
+    <path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a6.8 6.8 0 0 0 10.5 10.5Z"/>
+  </symbol>
+</svg>
 
 <a class="skip-link" href="#main">Skip to main content</a>
 
 <header class="site-header">
   <nav class="nav" aria-label="Primary">
     <a class="nav__brand" href="#top">Tetiana Donchenko</a>
-    <button class="nav__toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu">
-      <span class="nav__toggle-bar"></span>
-      <span class="nav__toggle-bar"></span>
-      <span class="nav__toggle-bar"></span>
-      <span class="sr-only">Menu</span>
-    </button>
     <ul class="nav__menu" id="navMenu">
       <li><a href="#about">About</a></li>
       <li><a href="#experience">Experience</a></li>
@@ -56,6 +173,19 @@
       <li><a href="#skills">Skills</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
+    <div class="nav__controls">
+      <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false" aria-label="Switch to dark theme">
+        <svg class="icon theme-toggle__icon theme-toggle__icon--sun" aria-hidden="true" focusable="false"><use href="#icon-sun"></use></svg>
+        <svg class="icon theme-toggle__icon theme-toggle__icon--moon" aria-hidden="true" focusable="false"><use href="#icon-moon"></use></svg>
+        <span class="theme-toggle__label">Dark</span>
+      </button>
+      <button class="nav__toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu">
+        <span class="nav__toggle-bar"></span>
+        <span class="nav__toggle-bar"></span>
+        <span class="nav__toggle-bar"></span>
+        <span class="sr-only">Menu</span>
+      </button>
+    </div>
   </nav>
 </header>
 
@@ -75,15 +205,30 @@
       <img src="assets/tetiana-portrait.jpg" alt="Portrait of Tetiana Donchenko" width="480" height="600">
     </div>
     <div class="hero__content">
-      <p class="hero__eyebrow">Junior Project Manager</p>
       <h1>Tetiana Donchenko</h1>
-      <p class="hero__location">Boryspil, Kyiv Region, Ukraine · Remote / Hybrid</p>
-      <p class="hero__intro">My experience is in organizing and coordinating educational and operational processes in online IT education. I am currently developing my skills and career in IT Project Management after completing formal PM and Scrum training and independently completing the CityHub educational portfolio project.</p>
+      <p class="hero__role">Junior Project Manager</p>
+      <p class="hero__location">
+        <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-pin"></use></svg>
+        Boryspil, Kyiv Region, Ukraine · Remote / Hybrid
+      </p>
+      <p class="hero__intro">Coordination-focused professional with nearly 11 years of experience coordinating educational and operational processes for online IT courses, now developing a career in IT Project Management.</p>
       <div class="hero__actions">
-        <a class="btn btn--primary" href="#cityhub">View CityHub</a>
-        <a class="btn btn--secondary" href="assets/CV_Tetiana_Donchenko_Junior_Project_Manager_EN.pdf" download>Download CV</a>
-        <a class="btn btn--secondary" href="https://www.linkedin.com/in/tetiana-donchenko-588a44184/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-        <a class="btn btn--secondary" href="#contact">Contact Me</a>
+        <a class="btn btn--primary" href="#cityhub">
+          <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-arrow-right"></use></svg>
+          View CityHub
+        </a>
+        <a class="btn btn--secondary" href="assets/CV_Tetiana_Donchenko_Junior_Project_Manager_EN.pdf" download>
+          <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-download"></use></svg>
+          Download CV
+        </a>
+        <a class="btn btn--secondary" href="https://www.linkedin.com/in/tetiana-donchenko-588a44184/" target="_blank" rel="noopener noreferrer">
+          <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-external"></use></svg>
+          LinkedIn
+        </a>
+        <a class="btn btn--secondary" href="#contact">
+          <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-message"></use></svg>
+          Contact Me
+        </a>
       </div>
     </div>
   </section>
@@ -92,9 +237,9 @@
   <section class="section" id="about">
     <h2 class="section__title">About</h2>
     <div class="section__body">
-      <p>For nearly 11 years, I have organized and coordinated the educational and operational process at an online IT education company, working with multiple study groups at once and keeping schedules, documentation, and communication running smoothly between instructors, students, sales managers, and accounting.</p>
-      <p>I am now building on that foundation to move into IT Project Management. I completed the Project Management with AI course at Hillel IT School and hold a Scrum Fundamentals Certified (SFC™) credential, and I independently developed a full set of planning and documentation artifacts for CityHub, an educational portfolio project.</p>
-      <p>I am looking for Junior Project Manager or Project Coordinator opportunities where I can apply my coordination experience and continue growing my project management skills.</p>
+      <p>For nearly 11 years, I organized and coordinated educational and operational processes for online IT courses, working with multiple study groups and supporting communication between instructors, students, sales managers, and accounting.</p>
+      <p>I am currently developing my skills and career in IT Project Management. I completed the Project Management with AI course at Hillel IT School, earned the Scrum Fundamentals Certified (SFC™) credential, and independently completed CityHub — an educational portfolio project based on my own original concept and supported by a structured set of project documentation.</p>
+      <p>I am seeking a full-time Junior Project Manager or Project Coordinator role in a remote or hybrid format.</p>
     </div>
   </section>
 
@@ -104,7 +249,8 @@
     or language, just add/delete an <li> line in the matching list below.
   -->
   <section class="section" id="skills">
-    <h2 class="section__title">Core Strengths</h2>
+    <h2 class="section__title">Skills</h2>
+    <h3 class="section__subtitle section__subtitle--first">Core Strengths</h3>
     <ul class="tag-grid">
       <li class="tag">Project Coordination</li>
       <li class="tag">Schedule Planning</li>
@@ -190,9 +336,11 @@
       <h3>CityHub — Unified Information Platform of Ukraine's Settlements</h3>
       <p class="card__org">Role: Project Manager (Educational Project) · Project Management with AI, Hillel IT School</p>
 
-      <p>CityHub was completed independently as the final assignment for the Project Management with AI course. It is a concept for a unified web platform that would organize information about Ukrainian settlements — public institutions, local businesses, and infrastructure — for citizens, IDPs, tourists, and communities. No platform was built or launched, there was no client engagement, and no real project team was managed; this is an educational demonstration of project planning and documentation skills, not a commercial project.</p>
+      <p>CityHub is an original project concept that I conceived, planned, and documented independently as the final assignment for the Project Management with AI course at Hillel IT School.</p>
 
-      <p>The work covered the planning and documentation stages of a project lifecycle, from initiation through MVP planning, producing a structured set of PM artifacts grouped below.</p>
+      <p>I independently selected the project topic and created the idea, concept, scope, and documentation for a proposed unified web platform that would organize information about Ukrainian settlements — including public institutions, local businesses, and infrastructure — for citizens, IDPs, tourists, and local communities.</p>
+
+      <p>Working in the role of Project Manager (Educational Project), I planned and documented the concept from initiation through MVP planning and prepared a structured set of project management artifacts. The platform itself was not developed or launched, there was no client engagement, and no real project team was managed.</p>
 
       <div class="artifact-groups">
         <div class="artifact-group">
@@ -213,7 +361,7 @@
         </div>
       </div>
 
-      <p class="card__note">Basic portfolio-level familiarity with Jira and Confluence was developed while working on backlog structure and centralized documentation; this work is still in progress.</p>
+      <p class="card__note">Basic portfolio-level familiarity with Jira and Confluence was developed through the CityHub educational project. Project documentation is organized in Confluence, and a basic Jira project has been created for backlog and task structuring; the Jira setup is still being improved.</p>
 
       <div class="hero__actions">
         <a class="btn btn--primary" href="https://docs.google.com/document/d/1FrG61ZIyFxQ7JBoT3jIEdAyrppXVNqJF" target="_blank" rel="noopener noreferrer">Project Charter</a>
@@ -239,7 +387,7 @@
           <li><a href="https://docs.google.com/document/d/1zG7YHt7ATMs9q-JKiEC1JEn_TH5_16_D" target="_blank" rel="noopener noreferrer">Risk Register</a></li>
           <li><a href="https://docs.google.com/presentation/d/1O_CmOKrIo4q6h6UnmBXQeDx4OZE6z7b3" target="_blank" rel="noopener noreferrer">Final Project Presentation</a></li>
         </ul>
-        <p class="card__note">Jira and Confluence materials are in progress and are not yet public.</p>
+        <p class="card__note">The Jira project is still being improved and is not yet public.</p>
       </details>
     </article>
   </section>
@@ -287,13 +435,16 @@
     <h2 class="section__title">Contact</h2>
     <div class="card contact-card">
       <ul class="contact-list">
-        <li><span class="contact-label">Email</span> <a href="mailto:tssavdon@gmail.com">tssavdon@gmail.com</a></li>
-        <li><span class="contact-label">LinkedIn</span> <a href="https://www.linkedin.com/in/tetiana-donchenko-588a44184/" target="_blank" rel="noopener noreferrer">linkedin.com/in/tetiana-donchenko</a></li>
-        <li><span class="contact-label">Telegram</span> <a href="https://t.me/TSSavDon" target="_blank" rel="noopener noreferrer">@TSSavDon</a></li>
-        <li><span class="contact-label">Location</span> Boryspil, Kyiv Region, Ukraine</li>
-        <li><span class="contact-label">Availability</span> Remote / Hybrid</li>
+        <li><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-mail"></use></svg><span class="contact-label">Email</span> <a href="mailto:tssavdon@gmail.com">tssavdon@gmail.com</a></li>
+        <li><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-external"></use></svg><span class="contact-label">LinkedIn</span> <a href="https://www.linkedin.com/in/tetiana-donchenko-588a44184/" target="_blank" rel="noopener noreferrer">linkedin.com/in/tetiana-donchenko</a></li>
+        <li><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-telegram"></use></svg><span class="contact-label">Telegram</span> <a href="https://t.me/TSSavDon" target="_blank" rel="noopener noreferrer">@TSSavDon</a></li>
+        <li><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-pin"></use></svg><span class="contact-label">Location</span> Boryspil, Kyiv Region, Ukraine</li>
+        <li><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-briefcase"></use></svg><span class="contact-label">Availability</span> Remote / Hybrid</li>
       </ul>
-      <a class="btn btn--primary" href="assets/CV_Tetiana_Donchenko_Junior_Project_Manager_EN.pdf" download>Download CV</a>
+      <a class="btn btn--primary" href="assets/CV_Tetiana_Donchenko_Junior_Project_Manager_EN.pdf" download>
+        <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-download"></use></svg>
+        Download CV
+      </a>
     </div>
   </section>
 
